@@ -1,0 +1,27 @@
+name: Update GitHub Wiki
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v3
+      - uses: snok/install-poetry@v1
+
+      - run: poetry install
+      - run: poetry add pdoc3 --dev
+      - run: poetry run pdoc --force -o docs prettier_json.py
+      - run: mv docs/index.md docs/Home.md
+
+      - name: Upload Documentation to Wiki
+        uses: SwiftDocOrg/github-wiki-publish-action@v1
+        with:
+          path: "docs"
+        env:
+          GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
