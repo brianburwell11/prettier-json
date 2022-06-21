@@ -1,3 +1,13 @@
+## 0.2.0 (2022-06-21)
+
+### Refactor
+
+- [![bab6b](https://img.shields.io/badge/-bab6b-%23121011.svg?style=flat-square&logo=github&logoColor=white)](https://github.com/brianburwell11/prettier-json/commit/bab6bb92809d72f176ce4ed9184a84575da80871) define defaults as constants
+
+### Features
+
+- [![48ef5](https://img.shields.io/badge/-48ef5-%23121011.svg?style=flat-square&logo=github&logoColor=white)](https://github.com/brianburwell11/prettier-json/commit/48ef554c75371f72d26724eb19166bf3533ca2b2) add CLI
+
 ## 0.1.0 (2022-06-21)
 
 ### Features
