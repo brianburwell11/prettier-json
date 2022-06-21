@@ -32,17 +32,17 @@ def prettyjson(obj, indent=DEFAULT_INDENT_SIZE, maxlinelength=DEFAULT_MAXLINELEN
         A representation of the JSON to be piped to a .json file
     """
 
-    items, _ = getsubitems(
+    items, _ = _getsubitems(
         obj,
         itemkey="",
         islast=True,
         maxlinelength=maxlinelength - indent,
         indent=indent,
     )
-    return indentitems(items, indent, level=0)
+    return _indentitems(items, indent, level=0)
 
 
-def getsubitems(obj, itemkey, islast, maxlinelength, indent):
+def _getsubitems(obj, itemkey, islast, maxlinelength, indent):
     """Get all of the items within an iterable object
 
     Parameters
@@ -81,7 +81,7 @@ def getsubitems(obj, itemkey, islast, maxlinelength, indent):
         # render basic type
         keyseparator = "" if itemkey == "" else ": "
         itemseparator = "" if islast else ","
-        items.append(itemkey + keyseparator + basictype2str(obj) + itemseparator)
+        items.append(itemkey + keyseparator + _basictype2str(obj) + itemseparator)
 
     else:
         # render lists/dicts/tuples
@@ -109,8 +109,8 @@ def getsubitems(obj, itemkey, islast, maxlinelength, indent):
             islast_ = i == len(obj) - 1
             itemkey_ = ""
             if isdict:
-                itemkey_ = basictype2str(k)
-            inner, is_inner_inline = getsubitems(
+                itemkey_ = _basictype2str(k)
+            inner, is_inner_inline = _getsubitems(
                 obj[k], itemkey_, islast_, maxlinelength - indent, indent
             )
             subitems.extend(inner)  # inner can be a string or a list
@@ -197,7 +197,7 @@ def getsubitems(obj, itemkey, islast, maxlinelength, indent):
     return items, is_inline
 
 
-def basictype2str(obj):
+def _basictype2str(obj):
     """Convert a python object to its string representation
 
     Parameters
@@ -222,7 +222,7 @@ def basictype2str(obj):
     return strobj
 
 
-def indentitems(items, indent, level):
+def _indentitems(items, indent, level):
     """Recursively traverses the list of json lines, adds indentation based on the current depth
 
     Parameters
@@ -243,7 +243,7 @@ def indentitems(items, indent, level):
     indentstr = " " * (indent * level)
     for (i, item) in enumerate(items):
         if isinstance(item, list):
-            res += indentitems(item, indent, level + 1)
+            res += _indentitems(item, indent, level + 1)
         else:
             islast = i == len(items) - 1
             # no new line character after the last rendered line
