@@ -7,7 +7,7 @@ from prettier_json.prettier_json import (
     DEFAULT_INDENT_SIZE,
     DEFAULT_MAX_LINE_LENGTH,
     __version__,
-    pretty_json,
+    dumps,
 )
 
 parser = argparse.ArgumentParser(
@@ -57,7 +57,7 @@ for json_file in args.json_files:
     except json.decoder.JSONDecodeError:
         sys.exit(f"ERROR: {json_file} is not valid JSON")
 
-    json_contents = pretty_json(
+    json_contents = dumps(
         json_contents,
         indent=args.indent,
         max_line_length=args.line_length,

@@ -12,9 +12,7 @@ DEFAULT_MAX_LINE_LENGTH = 80
 """int: How many characters to limit line length to if not specified"""
 
 
-def pretty_json(
-    obj, indent=DEFAULT_INDENT_SIZE, max_line_length=DEFAULT_MAX_LINE_LENGTH
-):
+def dumps(obj, indent=DEFAULT_INDENT_SIZE, max_line_length=DEFAULT_MAX_LINE_LENGTH):
     """Renders JSON content with indentation and line splits/concatenations to fit max_line_length.
 
     Only dicts, lists and basic types are supported
