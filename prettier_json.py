@@ -2,7 +2,7 @@
 .. include:: README.md
 """
 
-__version__ = "0.0.1"
+__version__ = "0.1.0"
 
 
 def prettyjson(obj, indent=2, maxlinelength=80):
