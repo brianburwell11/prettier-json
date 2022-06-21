@@ -6,7 +6,13 @@ __version__ = "0.1.0"
 __docformat__ = "numpy"
 
 
-def prettyjson(obj, indent=2, maxlinelength=80):
+DEFAULT_INDENT_SIZE = 2
+"""int: How many spaces to use as an indent if not specified"""
+DEFAULT_MAXLINELENGTH = 80
+"""int: How many characters to limit line length to if not specified"""
+
+
+def prettyjson(obj, indent=DEFAULT_INDENT_SIZE, maxlinelength=DEFAULT_MAXLINELENGTH):
     """Renders JSON content with indentation and line splits/concatenations to fit maxlinelength.
 
     Only dicts, lists and basic types are supported

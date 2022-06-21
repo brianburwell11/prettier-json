@@ -3,7 +3,12 @@ import json
 import pathlib
 import sys
 
-from prettier_json.prettier_json import __version__, prettyjson
+from prettier_json.prettier_json import (
+    DEFAULT_INDENT_SIZE,
+    DEFAULT_MAXLINELENGTH,
+    __version__,
+    prettyjson,
+)
 
 parser = argparse.ArgumentParser(
     prog="prettier_json", description="Generate prettier and more compact JSON files."
@@ -24,8 +29,8 @@ parser.add_argument(
     metavar="INDENT_SIZE",
     type=int,
     nargs="?",
-    default=2,
-    help="number of spaces to use as an indent",
+    default=DEFAULT_INDENT_SIZE,
+    help=f"number of spaces to use as an indent. Default={DEFAULT_INDENT_SIZE}",
 )
 parser.add_argument(
     "-l",
@@ -33,8 +38,8 @@ parser.add_argument(
     metavar="MAX_LENGTH",
     type=int,
     nargs="?",
-    default=80,
-    help="how many characters to allow on a single line before wrapping to a newline",
+    default=DEFAULT_MAXLINELENGTH,
+    help=f"how many characters to allow on a single line before wrapping to a newline. Default={DEFAULT_MAXLINELENGTH}",
 )
 
 args = parser.parse_args()
