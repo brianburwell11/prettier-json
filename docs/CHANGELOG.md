@@ -1,3 +1,10 @@
+## 1.0.0 (2022-06-21)
+
+### Refactor
+
+- [![24bf1](https://img.shields.io/badge/-24bf1-%23121011.svg?style=flat-square&logo=github&logoColor=white)](https://github.com/brianburwell11/prettierjson/commit/24bf1dfe107cc52f9648c1753cf52af74af623f5) rename package to `prettierjson`
+- [![a078b](https://img.shields.io/badge/-a078b-%23121011.svg?style=flat-square&logo=github&logoColor=white)](https://github.com/brianburwell11/prettierjson/commit/a078b59a883fa35fb0f76541a427ddf7bdb032a7) make helper functions "private"
+
 ## 0.2.0 (2022-06-21)
 
 ### Refactor

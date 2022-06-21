@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "prettierjson"
-version = "0.2.0"
+version = "1.0.0"
 description = "Generate prettier and more compact JSON dumps"
 authors = ["Brian Burwell <brianburwell11@gmail.com>"]
 readme = "README.md"
@@ -21,7 +21,7 @@ cz-github-jira-conventional-footer = "^1.0.2"
 
 [tool.commitizen]
 name = "cz_github_jira_conventional_footer"
-version = "0.2.0"
+version = "1.0.0"
 tag_format = "$version"
 version_files = [
     "README.md",
