@@ -33,6 +33,9 @@ github_repo = "brianburwell11/prettierjson"
 changelog_file = "docs/CHANGELOG.md"
 update_changelog_on_bump = true
 
+[tool.poetry.scripts]
+prettierjson = "prettierjson.__main__:main"
+
 [tool.isort]
 profile = "black"
 
