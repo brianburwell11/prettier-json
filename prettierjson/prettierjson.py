@@ -2,7 +2,7 @@ __version__ = "1.0.0"
 __docformat__ = "numpy"
 
 
-DEFAULT_INDENT_SIZE = 2
+DEFAULT_INDENT_SIZE = 4
 """int: How many spaces to use as an indent if not specified"""
 DEFAULT_MAX_LINE_LENGTH = 80
 """int: How many characters to limit line length to if not specified"""
