@@ -1,3 +1,9 @@
+## 1.0.1 (2022-06-21)
+
+### Refactor
+
+- [![f7cb7](https://img.shields.io/badge/-f7cb7-%23121011.svg?style=flat-square&logo=github&logoColor=white)](https://github.com/brianburwell11/prettierjson/commit/f7cb7727675352a1938dfe3d8c2b9ac48d0dfee8) wrap `__main__.py` into a function
+
 ## 1.0.0 (2022-06-21)
 
 ### Refactor
