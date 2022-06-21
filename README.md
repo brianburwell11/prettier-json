@@ -21,8 +21,50 @@ poetry add git+ssh://git@github.com/brianburwell11/prettierjson.git#master
 
 ## Usage
 
-<!-- add simple usage instructions here  -->
+### in python scripts
 
+prettierjson offers one function `prettierjson.dumps()` which is intended to be used as a drop-in replacement for `json.dumps()`
+
+```python
+from prettierjson import dumps
+
+my_dictionary = {"foo": bar}
+
+with open("foobar.json", "w") as f:
+    f.write(dumps(my_dictionary))
+```
+
+If prettierjson needs to exist within the same module as the built-in json package _without overriding_ the default `json.dumps()`, the entire package should be imported in order to avoid namespace collisions
+```python
+import json
+import prettierjson
+
+my_dictionary = {"foo": bar}
+
+with open("builtin.json", "w") as f:
+    f.write(json.dumps(my_dictionary))
+with open("prettierjson.json", "w") as f:
+    f.write(prettierjson.dumps(my_dictionary))
+```
+
+See [the documentation][documentation] for more details.
+
+
+### as a command line interface
+
+prettierjson has a `__main__` module which allows it to be called directly when installed with the command `python -m prettierjson`.
+
+In this way, prettierjson can be used to "prettify" one or multiple JSON files in-place by passing them as arguments
+```sh
+$ python -m prettierjson PATH/TO/JSON/FILE1.json PATH/TO/JSON/FILE2.json
+```
+
+Indent size and max line length can be set with the `--indent` and `--line-length` flags
+```sh
+$ python -m prettierjson --indent=2 --line-length=88 PATH/TO/JSON/FILE.json
+```
+
+Run `python -m prettierjson -h` for more command line usage details.
 
 
 <!-- links -->
