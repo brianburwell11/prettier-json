@@ -3,20 +3,21 @@
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg?style=flat-square)](https://www.python.org/)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg?style=flat-square)](https://github.com/psf/black)
 [![Github release](https://img.shields.io/badge/release-1.0.0-blue.svg?style=flat-square)](https://github.com/brianburwell11/prettierjson/releases/tag/1.0.0)
+[![PyPi](https://img.shields.io/badge/-PyPi-white.svg?logo=pypi&labelColor=4B8BBE&logoColor=FFD43B&style=flat-square)](https://pypi.org/project/prettierjson/)
 [![Documentation](https://img.shields.io/badge/-Documentation-2980b9.svg?logo=readthedocs&labelColor=2980b9&logoColor=FFFFFF&style=flat-square)][documentation]
 
 Generate prettier and more compact JSON dumps
 
 ## Installation
 
-**prettierjson** can be installed directly from the GitHub repository using one of these commands:
+**prettierjson** can be installed using one of these commands:
 
 ```sh
-pip install git+ssh://git@github.com/brianburwell11/prettierjson.git@master
+pip install prettierjson
 ```
 
 ```sh
-poetry add git+ssh://git@github.com/brianburwell11/prettierjson.git#master
+poetry add prettierjson
 ```
 
 ## Usage
