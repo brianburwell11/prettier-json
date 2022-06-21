@@ -16,8 +16,8 @@ jobs:
 
       - run: poetry install
       - run: poetry add pdoc3 --dev
-      - run: poetry run pdoc --force -o docs prettier_json
-      - run: mv docs/prettier_json/index.md docs/Home.md
+      - run: poetry run pdoc --force -o docs prettierjson
+      - run: mv docs/prettierjson/index.md docs/Home.md
 
       - name: Upload Documentation to Wiki
         uses: SwiftDocOrg/github-wiki-publish-action@v1

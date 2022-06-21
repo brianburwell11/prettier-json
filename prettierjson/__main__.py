@@ -3,7 +3,7 @@ import json
 import pathlib
 import sys
 
-from prettier_json.prettier_json import (
+from prettierjson.prettierjson import (
     DEFAULT_INDENT_SIZE,
     DEFAULT_MAX_LINE_LENGTH,
     __version__,
@@ -11,7 +11,7 @@ from prettier_json.prettier_json import (
 )
 
 parser = argparse.ArgumentParser(
-    prog="prettier_json", description="Generate prettier and more compact JSON files."
+    prog="prettierjson", description="Generate prettier and more compact JSON files."
 )
 parser.add_argument(
     "-v", "--version", action="version", version=f"%(prog)s {__version__}"

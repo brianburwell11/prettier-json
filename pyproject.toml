@@ -1,12 +1,12 @@
 [tool.poetry]
-name = "prettier_json"
+name = "prettierjson"
 version = "0.2.0"
 description = "Generate prettier and more compact JSON dumps"
 authors = ["Brian Burwell <brianburwell11@gmail.com>"]
 readme = "README.md"
-homepage = "https://github.com/brianburwell11/prettier-json"
-repository = "https://github.com/brianburwell11/prettier-json"
-documentation = "https://github.com/brianburwell11/prettier-json/wiki"
+homepage = "https://github.com/brianburwell11/prettierjson"
+repository = "https://github.com/brianburwell11/prettierjson"
+documentation = "https://github.com/brianburwell11/prettierjson/wiki"
 
 [tool.poetry.dependencies]
 python = "^3.9"
@@ -26,10 +26,10 @@ tag_format = "$version"
 version_files = [
     "README.md",
     "pyproject.toml:version",
-    "prettier_json/prettier_json.py:__version__" 
+    "prettierjson/prettierjson.py:__version__" 
 ]
 jira_base_url = "https://X.atlassian.net"
-github_repo = "brianburwell11/prettier-json"
+github_repo = "brianburwell11/prettierjson"
 changelog_file = "docs/CHANGELOG.md"
 update_changelog_on_bump = true
 
