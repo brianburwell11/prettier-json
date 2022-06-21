@@ -5,9 +5,9 @@ import sys
 
 from prettier_json.prettier_json import (
     DEFAULT_INDENT_SIZE,
-    DEFAULT_MAXLINELENGTH,
+    DEFAULT_MAX_LINE_LENGTH,
     __version__,
-    prettyjson,
+    pretty_json,
 )
 
 parser = argparse.ArgumentParser(
@@ -38,8 +38,8 @@ parser.add_argument(
     metavar="MAX_LENGTH",
     type=int,
     nargs="?",
-    default=DEFAULT_MAXLINELENGTH,
-    help=f"how many characters to allow on a single line before wrapping to a newline. Default={DEFAULT_MAXLINELENGTH}",
+    default=DEFAULT_MAX_LINE_LENGTH,
+    help=f"how many characters to allow on a single line before wrapping to a newline. Default={DEFAULT_MAX_LINE_LENGTH}",
 )
 
 args = parser.parse_args()
@@ -57,8 +57,10 @@ for json_file in args.json_files:
     except json.decoder.JSONDecodeError:
         sys.exit(f"ERROR: {json_file} is not valid JSON")
 
-    json_contents = prettyjson(
-        json_contents, indent=args.indent, maxlinelength=args.line_length
+    json_contents = pretty_json(
+        json_contents,
+        indent=args.indent,
+        max_line_length=args.line_length,
     )
     with open(json_file, "w") as f:
         f.write(json_contents)

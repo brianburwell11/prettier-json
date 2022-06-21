@@ -8,12 +8,14 @@ __docformat__ = "numpy"
 
 DEFAULT_INDENT_SIZE = 2
 """int: How many spaces to use as an indent if not specified"""
-DEFAULT_MAXLINELENGTH = 80
+DEFAULT_MAX_LINE_LENGTH = 80
 """int: How many characters to limit line length to if not specified"""
 
 
-def prettyjson(obj, indent=DEFAULT_INDENT_SIZE, maxlinelength=DEFAULT_MAXLINELENGTH):
-    """Renders JSON content with indentation and line splits/concatenations to fit maxlinelength.
+def pretty_json(
+    obj, indent=DEFAULT_INDENT_SIZE, max_line_length=DEFAULT_MAX_LINE_LENGTH
+):
+    """Renders JSON content with indentation and line splits/concatenations to fit max_line_length.
 
     Only dicts, lists and basic types are supported
 
@@ -23,7 +25,7 @@ def prettyjson(obj, indent=DEFAULT_INDENT_SIZE, maxlinelength=DEFAULT_MAXLINELEN
         A python object to be converted to JSON
     indent : int, optional
         How many spaces to use as an indent before nested keys. Default is 2
-    maxlinelength : int, optional
+    max_line_length : int, optional
         How many characters to limit a single line to before wrapping to the next line. Default is 80 characters
 
     Returns
@@ -32,27 +34,27 @@ def prettyjson(obj, indent=DEFAULT_INDENT_SIZE, maxlinelength=DEFAULT_MAXLINELEN
         A representation of the JSON to be piped to a .json file
     """
 
-    items, _ = _getsubitems(
+    items, _ = _get_subitems(
         obj,
-        itemkey="",
-        islast=True,
-        maxlinelength=maxlinelength - indent,
+        item_key="",
+        is_last=True,
+        max_line_length=max_line_length - indent,
         indent=indent,
     )
-    return _indentitems(items, indent, level=0)
+    return _indent_items(items, indent, level=0)
 
 
-def _getsubitems(obj, itemkey, islast, maxlinelength, indent):
+def _get_subitems(obj, item_key, is_last, max_line_length, indent):
     """Get all of the items within an iterable object
 
     Parameters
     ----------
     obj : any
-    itemkey : str
+    item_key : str
         The key for the
-    islast : bool
+    is_last : bool
         Whether or not `obj` is the last item in the JSON object.
-    maxlinelength : int
+    max_line_length : int
         How many characters to limit a single line to before wrapping to the next line. Default is 80 characters
     indent : int
         How many spaces to use as an indent before nested keys. Default is 2
@@ -69,56 +71,58 @@ def _getsubitems(obj, itemkey, islast, maxlinelength, indent):
     is_inline = (
         True  # at first, assume we can concatenate the inner tokens into one line
     )
-    isdict = isinstance(obj, dict)
-    islist = isinstance(obj, list)
-    istuple = isinstance(obj, tuple)
-    isbasictype = not (isdict or islist or istuple)
+    is_dict = isinstance(obj, dict)
+    is_list = isinstance(obj, list)
+    is_tuple = isinstance(obj, tuple)
+    is_basic_type = not (is_dict or is_list or is_tuple)
 
-    maxlinelength = max(0, maxlinelength)
+    max_line_length = max(0, max_line_length)
 
     # build json content as a list of strings or child lists
-    if isbasictype:
+    if is_basic_type:
         # render basic type
-        keyseparator = "" if itemkey == "" else ": "
-        itemseparator = "" if islast else ","
-        items.append(itemkey + keyseparator + _basictype2str(obj) + itemseparator)
+        key_separator = "" if item_key == "" else ": "
+        item_separator = "" if is_last else ","
+        items.append(
+            item_key + key_separator + _basic_type_to_string(obj) + item_separator
+        )
 
     else:
         # render lists/dicts/tuples
-        if isdict:
+        if is_dict:
             opening, closing, keys = ("{", "}", iter(obj.keys()))
-        elif islist:
+        elif is_list:
             opening, closing, keys = ("[", "]", range(0, len(obj)))
-        elif istuple:
+        elif is_tuple:
             opening, closing, keys = (
                 "[",
                 "]",
                 range(0, len(obj)),
             )  # tuples are converted into json arrays
 
-        if itemkey != "":
-            opening = itemkey + ": " + opening
-        if not islast:
+        if item_key != "":
+            opening = item_key + ": " + opening
+        if not is_last:
             closing += ","
 
-        itemkey = ""
+        item_key = ""
         subitems = []
 
         # get the list of inner tokens
         for (i, k) in enumerate(keys):
-            islast_ = i == len(obj) - 1
-            itemkey_ = ""
-            if isdict:
-                itemkey_ = _basictype2str(k)
-            inner, is_inner_inline = _getsubitems(
-                obj[k], itemkey_, islast_, maxlinelength - indent, indent
+            is_last_ = i == len(obj) - 1
+            item_key_ = ""
+            if is_dict:
+                item_key_ = _basic_type_to_string(k)
+            inner, is_inner_inline = _get_subitems(
+                obj[k], item_key_, is_last_, max_line_length - indent, indent
             )
             subitems.extend(inner)  # inner can be a string or a list
             is_inline = (
                 is_inline and is_inner_inline
             )  # if a child couldn't be rendered inline, then we are not able either
 
-        # fit inner tokens into one or multiple lines, each no longer than maxlinelength
+        # fit inner tokens into one or multiple lines, each no longer than max_line_length
         if is_inline:
             multiline = True
 
@@ -129,9 +133,9 @@ def _getsubitems(obj, itemkey, islast, maxlinelength, indent):
             # suitable for smaller lists or dicts where manual editing of individual items is preferred.
 
             # this logic may need to be customized based on visualization requirements:
-            if isdict:
+            if is_dict:
                 multiline = False
-            if islist:
+            if is_list:
                 multiline = True
 
             if multiline:
@@ -148,13 +152,13 @@ def _getsubitems(obj, itemkey, islast, maxlinelength, indent):
                     else:
                         try_inline = item_text
 
-                    if len(try_inline) > maxlinelength:
-                        # push the current line to the list if maxlinelength is reached
+                    if len(try_inline) > max_line_length:
+                        # push the current line to the list if max_line_length is reached
                         if len(current_line) > 0:
                             lines.append(current_line)
                         current_line = item_text
                     else:
-                        # keep fitting all to one line if still below maxlinelength
+                        # keep fitting all to one line if still below max_line_length
                         current_line = try_inline
 
                     # Push the remainder of the content if end of list is reached
@@ -165,10 +169,10 @@ def _getsubitems(obj, itemkey, islast, maxlinelength, indent):
                 if len(subitems) > 1:
                     is_inline = False
             else:  # single-line mode
-                totallength = len(subitems) - 1  # spaces between items
+                total_length = len(subitems) - 1  # spaces between items
                 for item in subitems:
-                    totallength += len(item)
-                if totallength <= maxlinelength:
+                    total_length += len(item)
+                if total_length <= max_line_length:
                     str = ""
                     for item in subitems:
                         str += (
@@ -183,7 +187,7 @@ def _getsubitems(obj, itemkey, islast, maxlinelength, indent):
             item_text = ""
             if len(subitems) > 0:
                 item_text = subitems[0]
-            if len(opening) + len(item_text) + len(closing) <= maxlinelength:
+            if len(opening) + len(item_text) + len(closing) <= max_line_length:
                 items.append(opening + item_text + closing)
             else:
                 is_inline = False
@@ -197,7 +201,7 @@ def _getsubitems(obj, itemkey, islast, maxlinelength, indent):
     return items, is_inline
 
 
-def _basictype2str(obj):
+def _basic_type_to_string(obj):
     """Convert a python object to its string representation
 
     Parameters
@@ -212,17 +216,17 @@ def _basictype2str(obj):
     """
 
     if isinstance(obj, str):
-        strobj = '"' + str(obj) + '"'
+        str_obj = '"' + str(obj) + '"'
     elif isinstance(obj, bool):
-        strobj = {True: "true", False: "false"}[obj]
+        str_obj = {True: "true", False: "false"}[obj]
     elif obj is None:
-        strobj = "null"
+        str_obj = "null"
     else:
-        strobj = str(obj)
-    return strobj
+        str_obj = str(obj)
+    return str_obj
 
 
-def _indentitems(items, indent, level):
+def _indent_items(items, indent, level):
     """Recursively traverses the list of json lines, adds indentation based on the current depth
 
     Parameters
@@ -240,15 +244,15 @@ def _indentitems(items, indent, level):
     """
 
     res = ""
-    indentstr = " " * (indent * level)
+    indent_str = " " * (indent * level)
     for (i, item) in enumerate(items):
         if isinstance(item, list):
-            res += _indentitems(item, indent, level + 1)
+            res += _indent_items(item, indent, level + 1)
         else:
-            islast = i == len(items) - 1
+            is_last = i == len(items) - 1
             # no new line character after the last rendered line
-            if level == 0 and islast:
-                res += indentstr + item
+            if level == 0 and is_last:
+                res += indent_str + item
             else:
-                res += indentstr + item + "\n"
+                res += indent_str + item + "\n"
     return res
