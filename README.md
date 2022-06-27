@@ -53,19 +53,19 @@ See [the documentation][documentation] for more details.
 
 ### as a command line interface
 
-prettierjson has a `__main__` module which allows it to be called directly when installed with the command `python -m prettierjson`.
+prettierjson can also be as a command line interface
 
 In this way, prettierjson can be used to "prettify" one or multiple JSON files in-place by passing them as arguments
 ```sh
-$ python -m prettierjson PATH/TO/JSON/FILE1.json PATH/TO/JSON/FILE2.json
+$ prettierjson PATH/TO/JSON/FILE1.json PATH/TO/JSON/FILE2.json
 ```
 
 Indent size and max line length can be set with the `--indent` and `--line-length` flags
 ```sh
-$ python -m prettierjson --indent=2 --line-length=88 PATH/TO/JSON/FILE.json
+$ prettierjson --indent=2 --line-length=88 PATH/TO/JSON/FILE.json
 ```
 
-Run `python -m prettierjson -h` for more command line usage details.
+Run `prettierjson -h` for more command line usage details.
 
 
 <!-- links -->
