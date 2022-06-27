@@ -73,6 +73,8 @@ def main():
         with open(json_file, "w") as f:
             f.write(json_contents)
 
+        print(f"prettified: {json_file}")
+
 
 if __name__ == "__main__":
     main()
